@@ -1,0 +1,49 @@
+body {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem;
+}
+
+.app-content {
+    height: 20rem;
+    overflow-y: scroll;
+}
+
+.app-timeline {
+    height: 36rem;
+    width: 30rem;
+    overflow-y: scroll;
+    overflow-x: visible;
+    padding-left: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding-top: 2.5rem;
+}
+
+/* width */
+.app-content::-webkit-scrollbar,
+.app-timeline::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+.app-content::-webkit-scrollbar-track,
+.app-timeline::-webkit-scrollbar-track {
+    border-radius: 20px;
+    background: transparent;
+}
+
+/* Handle */
+.app-content::-webkit-scrollbar-thumb,
+.app-timeline::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: rgba(136, 136, 136, 0.448);
+}
+
+/* Handle on hover */
+.app-content::-webkit-scrollbar-thumb:hover,
+.app-timeline::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

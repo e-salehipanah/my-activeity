@@ -1,0 +1,256 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no">
+    <script src="./jalalidatepicker.js"></script>
+    <script src="./flowbite.min.js"></script>
+    <link rel="stylesheet" href="./flowbite.min.css">
+    <link rel="stylesheet" href="./jalalidatepicker.css" />
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app-content {
+            height: 20rem;
+            overflow-y: scroll;
+        }
+
+        /* width */
+        .app-content::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        /* Track */
+        .app-content::-webkit-scrollbar-track {
+            border-radius: 20px;
+            background: transparent;
+        }
+
+        /* Handle */
+        .app-content::-webkit-scrollbar-thumb {
+            border-radius: 20px;
+            background: rgba(136, 136, 136, 0.21);
+        }
+
+        /* Handle on hover */
+        .app-content::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <a href="#">
+                <img class="rounded-t-lg" src="./image-1.jpg" alt="" />
+            </a>
+            <div class="p-5 flex flex-col align-center items-center app-content">
+                <div class="relative mb-2">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                            width="16" height="16" fill="currentColor" class="bi bi-calendar-week-fill"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z" />
+                        </svg>
+                    </div>
+
+                    <input data-jdp @input="onSelectDate" v-model="date" placeholder="select date"
+                        class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                    <button type="button" @click="addEvent" v-if="date"
+                        class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <svg aria-hidden="true" class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                            width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>
+                    </button>
+                </div>
+
+
+                <div v-for="(event,index) of events" :key="event.id"
+                    class="max-w-sm mb-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div class="inline-flex rounded-md shadow-sm mt-3" role="group">
+                        <button type="button" disabled
+                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                            <input data-jdp data-jdp-only-time v-model="event.start" placeholder="start"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        </button>
+                        <button type="button" disabled
+                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                            <input data-jdp data-jdp-only-time v-model="event.end" placeholder="end"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        </button>
+                    </div>
+
+                    <div class="inline-flex rounded-md shadow-sm mt-3" role="group">
+                        <button type="button" disabled
+                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                            <input type="text" placeholder="description" v-model="event.description"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        </button>
+                        <button type="button" @click="updateDB(event)"
+                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                            <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                                <path
+                                    d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+                            </svg>
+                        </button>
+                        <button type="button" @click="deleteEvent(event.id)"
+                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                            <svg aria-hidden="true" class="w-4 h-4 fill-current" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-trash" viewBox="0 0 16 16">
+                                <path
+                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                <path fill-rule="evenodd"
+                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                            </svg>
+
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <script>
+        jalaliDatepicker.startWatch({
+            hideAfterChange: true,
+            showTodayBtn: true,
+            autoHide: true,
+            showEmptyBtn: false,
+            topSpace: 10,
+            hasSecond: false,
+            bottomSpace: 30,
+            showCloseBtn: true,
+        });
+    </script>
+    <script src="./vue.js"></script>
+    <script>
+        const BASE_URL = "http://localhost:3000/"
+        var app = new Vue({
+            el: '#app',
+            data: {
+                events: [],
+                date: ""
+            },
+            methods: {
+                async onSelectDate() {
+                    this.events = await this.getEVents(this.date)
+                    if (!this.events.length) {
+                        this.events = [{}]
+                    }
+                },
+                async updateDB(event) {
+                    if (event.id) {
+                        event = await this.updateEvent(event.id, event)
+                    } else {
+                        const index = this.events.findIndex(ev => ev.fakeId == event.fakeId)
+                        const newEvent = await this.createEvent(event)
+                        this.events[index] = newEvent
+                        this.events = [...this.events]
+                    }
+                    event = {
+                        ...event
+                    }
+                },
+                getEVents(date) {
+                    var url = new URL(BASE_URL + 'date'),
+                        params = {
+                            date
+                        }
+                    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+                    return fetch(url, {
+                        method: "GET",
+
+                        headers: {
+
+                            params: {
+                                date
+                            }
+                        }
+                    }).then(response => response.json())
+                },
+                createEvent(event) {
+                    const newEvent = Object.assign(event, {
+                        date: this.date
+                    })
+                    return fetch(BASE_URL + 'date', {
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        method: "POST",
+                        body: JSON.stringify(newEvent)
+                    }).then(response => response.json())
+                },
+                updateEvent(id, event) {
+                    const newEvent = Object.assign(event, {
+                        date: this.date
+                    })
+                    return fetch(BASE_URL + 'date/' + id, {
+                        method: "PATCH",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(event)
+                    })
+                },
+                async deleteEvent(id) {
+                    if (!id) {
+                        return
+                    }
+                    await fetch(BASE_URL + 'date/' + id, {
+                        method: "DELETE",
+                    }).then(response => response.json())
+                    const {
+                        index
+                    } = this.binarySearch(item => item.id == id, this.events)
+                    this.events.splice(index, 1)
+                    if (!this.events.length) {
+                        this.addEvent()
+                    }
+                },
+                binarySearch(cb, arr) {
+                    let middle = arr[Math.floor(arr.length / 2)]
+                    let leftPart = arr.slice(0, arr.length / 2)
+                    let rightPart = arr.slice(arr.length / 2, arr.length)
+                    console.log(Math.floor(arr.length / 2));
+                    if (cb(middle)) {
+                        return {
+                            value: middle,
+                            index: Math.floor(arr.length / 2)
+                        }
+                    } else {
+                        return (cb(middle)) ?
+                            this.binarySearch(cb, rightPart) : this.binarySearch(cb, leftPart)
+                    }
+                },
+                async addEvent() {
+                    
+                    this.events.push({
+                        fakeId: Math.random(),
+                        start: this.events.length > 0 ? this.events[this.events.length - 1].end : undefined
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
